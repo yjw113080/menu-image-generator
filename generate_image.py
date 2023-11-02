@@ -3,17 +3,10 @@ import boto3 #import aws sdk and supporting libraries
 import json
 import base64
 from io import BytesIO
+import requests
 
 
-session = boto3.Session(
-    profile_name=os.environ.get("BWB_PROFILE_NAME")
-) #sets the profile name to use for AWS credentials
-
-bedrock = session.client(
-    service_name='bedrock-runtime', #creates a Bedrock client
-    region_name=os.environ.get("BWB_REGION_NAME"),
-    endpoint_url=os.environ.get("BWB_ENDPOINT_URL")
-) 
+bedrock = boto3.client(service_name='bedrock-runtime')
 
 bedrock_model_id = "stability.stable-diffusion-xl-v0" #use the Stable Diffusion model
 
