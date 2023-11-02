@@ -31,7 +31,7 @@ def get_response_image_from_payload(response): #returns the image bytes from the
 
 def get_image_response(prompt_content): #text-to-text client function
     print("============================")
-    print("get_image_response 함수에서 찍히는 prompt_content", prompt_content)
+    print("Prompt content given to get_image_response: ", prompt_content)
     request_body = json.dumps({"text_prompts": 
                                [ {"text": prompt_content } ], #prompts to use
                                "cfg_scale": 20, #how closely the model tries to match the prompt

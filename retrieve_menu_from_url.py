@@ -30,12 +30,10 @@ def retrieve_web_data(url):
 def get_menu(input_text):
     # Generate a prompt for extracting menu items
     template = (
-        f"\n\nHuman: Retrieve menu items from the given text in python array. I want the individual items to be a map which consists of title, ingredients and price. Include ingredients after the menu items. Exclude any drink menus. :\n"
+        f"\n\nHuman: Retrieve menu items from the given text in python array. I want the individual items to be a map which consists of title, ingredients and. Include ingredients after the menu items. Exclude any drink menus. :\n"
         f"{input_text}"
         f"\n\nAssistant:"
     )
-
-    # Create a PromptTemplate instance with the template and input variables
 
     bedrock = boto3.client(service_name='bedrock-runtime')
 
@@ -51,15 +49,13 @@ def get_menu(input_text):
 
     response = bedrock.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
     print(response)
-    response_body = json.loads(response.get('body').read())
+    json_data = json.loads(response)
 
-    menu_items = response_body.get('completion')
-    return menu_items
-    # if response.status_code == 200:
-    #     response_body = json.loads(response.get('body').read())
-    #     menu_items = response_body.get('completion')
-    #     return menu_items
-    # else:
-    #     print(f"Error calling the API: {response.status_code} - {response.text}")
-    #     return None
+    if json_data["ResponseMetadata"]["HTTPStatusCode"] == 200:
+        response_body = json.loads(response.get('body').read())
+        menu_items = response_body.get('completion')
+        return menu_items
+    else:
+        print(f"Error calling the API: {response.status_code} - {response.text}")
+        return None
 
