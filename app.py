@@ -81,7 +81,7 @@ with col2:
     menu_gen_button = st.button("Generate menu page", disabled=not st.session_state.process_button_active)
 
 with col3:
-    st.subheader("Input menu url")
+    st.subheader("New menu with images!")
     try:
         if menu_gen_button:
             html_content = "<html><body><table>"

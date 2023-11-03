@@ -3,10 +3,9 @@ import boto3 #import aws sdk and supporting libraries
 import json
 import base64
 from io import BytesIO
-import requests
 
 
-bedrock = boto3.client(service_name='bedrock-runtime')
+bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
 
 bedrock_model_id = "stability.stable-diffusion-xl-v0" #use the Stable Diffusion model
 

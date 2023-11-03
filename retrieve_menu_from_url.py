@@ -35,7 +35,7 @@ def get_menu(input_text):
         f"\n\nAssistant:"
     )
 
-    bedrock = boto3.client(service_name='bedrock-runtime')
+    bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
 
     body = json.dumps({
         "prompt": template,
@@ -48,11 +48,12 @@ def get_menu(input_text):
     contentType = 'application/json'
 
     response = bedrock.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
-    print(response)
-    json_data = json.loads(response)
 
-    if json_data["ResponseMetadata"]["HTTPStatusCode"] == 200:
-        response_body = json.loads(response.get('body').read())
+    json_data = json.loads(response)
+    response_body = json.loads(response.get('body').read())
+    print(response_body)
+    
+    if json_data["ResponseMetadata"]["HTTPStatusCode"] == 200:    
         menu_items = response_body.get('completion')
         return menu_items
     else:
