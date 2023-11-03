@@ -49,14 +49,12 @@ def get_menu(input_text):
 
     response = bedrock.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
 
-    json_data = json.loads(response)
+    # json_data = json.loads(response)
+    print(response)
+    print(type(response))
     response_body = json.loads(response.get('body').read())
-    print(response_body)
+    menu_items = response_body.get('completion')
+    print(menu_items)
+    return menu_items
     
-    if json_data["ResponseMetadata"]["HTTPStatusCode"] == 200:    
-        menu_items = response_body.get('completion')
-        return menu_items
-    else:
-        print(f"Error calling the API: {response.status_code} - {response.text}")
-        return None
 

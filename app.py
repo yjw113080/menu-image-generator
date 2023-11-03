@@ -48,6 +48,7 @@ with col1:
                             start_idx = menu_items.index('[')
                             end_idx = menu_items.rindex(']') + 1
                             cleaned_data = menu_items[start_idx:end_idx]
+                            cleaned_data = cleaned_data.replace("'", '"')
                             st.session_state.menu_array = json.loads(cleaned_data)
                             st.session_state.process_button_active = True
                         else:
