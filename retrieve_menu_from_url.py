@@ -30,7 +30,7 @@ def retrieve_web_data(url):
 def get_menu(input_text):
     # Generate a prompt for extracting menu items
     template = (
-        f"\n\nHuman: Retrieve menu items from the given text in python array. I want the individual items to be a map which consists of title, ingredients and. Include ingredients after the menu items. Exclude any drink menus. :\n"
+        f"\n\nHuman: Retrieve menu items from the given text in python array. I want the individual items to be a map which consists of title, ingredients and Price. Include ingredients after the menu items. Exclude any drink menus. :\n"
         f"{input_text}"
         f"\n\nAssistant:"
     )
